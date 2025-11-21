@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 
 export default async function ResourceListPage({ params }: { params: Promise<{ type: string }> }) {
     const { type } = await params
-    const validTypes = ['people', 'projects', 'funds']
+    const validTypes = ['people', 'projects', 'funds', 'knowledge', 'tasks', 'outcomes', 'algorithms', 'customers', 'requirements', 'ideas']
 
     if (!validTypes.includes(type)) {
         notFound()
@@ -18,7 +18,14 @@ export default async function ResourceListPage({ params }: { params: Promise<{ t
     const typeNames: Record<string, string> = {
         people: '人员',
         projects: '项目',
-        funds: '资金'
+        funds: '资金',
+        knowledge: '知识',
+        tasks: '任务',
+        outcomes: '成果',
+        algorithms: '算法',
+        customers: '客户',
+        requirements: '需求',
+        ideas: '创意'
     }
 
     return (

@@ -21,13 +21,20 @@ export default async function RootLayout({
       <body>
         <nav style={{ borderBottom: '1px solid var(--border)', padding: '1rem 0' }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-              <Link href="/" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>RMS</Link>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <Link href="/" style={{ fontWeight: 'bold', fontSize: '1.2rem', marginRight: '1rem' }}>RMS</Link>
               <Link href="/resources/people">人员</Link>
               <Link href="/resources/projects">项目</Link>
               <Link href="/resources/funds">资金</Link>
+              <Link href="/resources/knowledge">知识</Link>
+              <Link href="/resources/tasks">任务</Link>
+              <Link href="/resources/outcomes">成果</Link>
+              <Link href="/resources/algorithms">算法</Link>
+              <Link href="/resources/customers">客户</Link>
+              <Link href="/resources/requirements">需求</Link>
+              <Link href="/resources/ideas">创意</Link>
               {role === 'ADMIN' && (
-                <Link href="/approval" style={{ color: 'var(--primary)' }}>审批管理</Link>
+                <Link href="/approval" style={{ color: 'var(--primary)', fontWeight: 'bold' }}>审批管理</Link>
               )}
             </div>
             <RoleSwitcher currentRole={role} />
