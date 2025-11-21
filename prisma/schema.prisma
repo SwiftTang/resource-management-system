@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String @id @default(cuid())
+  name  String
+  email String @unique
+  role  String // "ADMIN" | "AUTHOR"
+  
+  requests ModificationRequest[]
+}
+
+model Resource {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  type        String   // "PERSON" | "PROJECT" | "FUND"
+  data        String   // JSON string for specific fields
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  modificationRequests ModificationRequest[]
+}
+
+model ModificationRequest {
+  id          String   @id @default(cuid())
+  resourceId  String?
+  resource    Resource? @relation(fields: [resourceId], references: [id])
+  
+  type        String   // "CREATE" | "UPDATE" | "DELETE"
+  data        String   // JSON string for new data
+  status      String   @default("PENDING") // "PENDING" | "APPROVED" | "REJECTED"
+  
+  requesterId String
+  requester   User     @relation(fields: [requesterId], references: [id])
+  
+  createdAt   DateTime @default(now())
+}
