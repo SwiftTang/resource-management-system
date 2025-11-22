@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import { updateResource, deleteResource } from '@/actions/resources'
 import Link from 'next/link'
+import DeleteButton from '@/components/DeleteButton'
 
 export default async function ResourceDetailPage({ params }: { params: Promise<{ type: string, id: string }> }) {
     const { type, id } = await params
@@ -34,16 +35,7 @@ export default async function ResourceDetailPage({ params }: { params: Promise<{
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h1 style={{ fontSize: '1.5rem' }}>编辑{typeNames[type]}</h1>
                 <form action={deleteResource.bind(null, id, type)}>
-                    <button
-                        type="submit"
-                        className="btn"
-                        style={{ background: 'var(--error)', color: 'white' }}
-                        onClick={(e) => {
-                            // Simple confirm would require client component, skipping for now or we can make this a client component
-                        }}
-                    >
-                        删除
-                    </button>
+                    <DeleteButton />
                 </form>
             </div>
 
