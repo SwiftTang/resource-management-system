@@ -30,6 +30,8 @@ vercel env pull .env.production.local --yes
 # 5. 部署到生产环境
 echo "🚀 正在部署到 Vercel..."
 vercel deploy --prod
+echo "🔗 正在绑定域名 ccbase.vercel.app..."
+vercel alias ccbase.vercel.app
 
 # 6. 数据库迁移 (可选，如果本地有生产环境的 DATABASE_URL)
 # 注意：通常 vercel env pull 会拉取到 .env.production.local，Prisma 默认不读取该文件
